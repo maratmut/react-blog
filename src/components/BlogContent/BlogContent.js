@@ -2,11 +2,12 @@ import React from 'react'
 import './BlogContent.css'
 import { posts } from '../../shared/ProjectData'
 import BlogCard from './BlogCard'
+import { AddPostForm } from './AddPostForm'
 
 export class BlogContent extends React.Component  {
 
   state = {
-    showBlog: true,
+    showAddForm: false,
     blogArr: JSON.parse(localStorage.getItem('blogPosts')) || posts
   }
 
@@ -23,10 +24,6 @@ export class BlogContent extends React.Component  {
 
    
 
-  toggleBlog = () => {
-    this.setState({showBlog: !this.state.showBlog})
-  }
-
   deletePost = (pos) => {
     if(window.confirm(`Удалить ${this.state.blogArr[pos].title}?`)) {
       const temp = [...this.state.blogArr]
@@ -38,6 +35,17 @@ export class BlogContent extends React.Component  {
     }
     
     
+  }
+  handleAddFormShow = () => {
+    this.setState({
+      showAddForm: true,
+    })
+  }
+
+  handleAddFormHide = () => {
+    this.setState({
+      showAddForm: false,
+    })
   }
     
       render() {
@@ -54,24 +62,20 @@ export class BlogContent extends React.Component  {
           )
         })
         return (
+          
           <>
-          <button onClick={this.toggleBlog}>{
-            this.state.showBlog ? 'скрыть блог' : 'показать блог'
-          }</button>
-          { this.state.showBlog &&
-            <>
+          {this.state.showAddForm && <AddPostForm handleAddFormHide={this.handleAddFormHide} />}
+         
+            
             <h1>Simple Blog</h1>
+            <button onClick={this.handleAddFormShow} className='blackBtn'>Создать пост</button>
           <div className="posts">
             {blogPosts}
           </div>
           </>
-          }
+        )
+}
           
   
           
-          
-          </>
-      )
-      }
-   
 }

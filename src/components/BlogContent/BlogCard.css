@@ -2,9 +2,28 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    
 }
 
 .deleteBtn svg {
-    font-size: 40px;
-    margin-top: 60px
+    font-size: 30px;
+    margin-top: 10px;
+    
+}
+
+.editBtn svg {
+    font-size: 30px;
+    margin-top: 10px;
+    
+}
+
+.postControl {
+    display: flex;
+    align-items: center;
+    
+}
+
+.postControl button {
+    padding: 0;
+    margin-left: 5px;
 }

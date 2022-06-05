@@ -7,6 +7,8 @@ import { EditPostForm } from './EditPostForm';
 import axios from 'axios';
 import CircularProgress from '@mui/material/CircularProgress';
 
+let source;
+
 export class BlogContent extends React.Component {
   state = {
     showAddForm: false,
@@ -17,13 +19,24 @@ export class BlogContent extends React.Component {
   };
 
   fetchPosts = () => {
-    
+    source = axios.CancelToken.source()
     axios.get("https://629a0d587b866a90ec486a69.mockapi.io/posts").then((response) => {
       this.setState({
         blogArr: response.data,
         isPending: false,
       })
     })
+  }
+
+  componentDidMount() {
+    this.fetchPosts()
+
+  }
+
+  componentWillUnmount() {
+    if(source) {
+      source.cancel('Axios get canceled')
+    }
   }
 
   likePost = (blogPost) => {
@@ -43,6 +56,7 @@ export class BlogContent extends React.Component {
       this.setState({
         isPending: true,
       })
+      
       axios.delete(`https://629a0d587b866a90ec486a69.mockapi.io/posts/${blogPost.id}`)
       .then((response) => {
         
@@ -118,18 +132,6 @@ export class BlogContent extends React.Component {
     })
   }
 
-  
-
-
-  componentDidMount() {
-    this.fetchPosts()
-
-    window.addEventListener('keyup', this.handleEscape);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('keyup', this.handleEscape);
-  }
 
   render() {
     const blogPosts = this.state.blogArr.map((item) => {

@@ -14,8 +14,16 @@ header {
     
     display: inline-block;
     margin: 0 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   
   header a:hover {
     color: #d15700
+  }
+
+  .active {
+    color: #d15700;
   }

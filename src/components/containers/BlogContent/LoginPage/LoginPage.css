@@ -1,0 +1,12 @@
+.loginForm {
+    text-align: center;
+}
+
+.loginForm input {
+    margin-bottom: 10px;
+    width: 200px;
+}
+
+.loginForm button {
+    width: 200px;
+}

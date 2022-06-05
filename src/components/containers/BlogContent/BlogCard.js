@@ -33,15 +33,17 @@ const BlogCard = ({
             </div>
             </div>
             
-            <div className="postControl" onClick={showEditForm}>
-                <button className='editBtn'>
+            <div className="postControl" >
+                <button className='editBtn' onClick={showEditForm}>
                     <EditIcon />
                 </button>
-
                 <button className='deleteBtn'>
                     <DeleteForeverIcon onClick={deletePost} />
-                </button>
+            </button>
+                
             </div>
+
+            
             
             
           </div>
